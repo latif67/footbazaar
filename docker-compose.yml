@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: footbazaar-db
+    restart: always
+    environment:
+      POSTGRES_USER: footbazaar_admin
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: footbazaar
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+
+volumes:
+  pgdata:
